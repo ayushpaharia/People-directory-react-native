@@ -10,7 +10,7 @@
 
 ## Tasks
 
-- [ ] 1.  Create a new private repo on github, invite vikas dosi (vikasdosi14). Only commit to this new repo.
+- [x] 1.  Create a new private repo on github, invite vikas dosi (vikasdosi14). Only commit to this new repo.
 
 - [ ] 2.  Fix PeopleListRow to display names correctly.
 
