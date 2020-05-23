@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const s = StyleSheet.create({
   root: {
@@ -8,6 +8,9 @@ const s = StyleSheet.create({
     marginHorizontal: 10,
     borderBottomColor: "#000",
     borderBottomWidth: StyleSheet.hairlineWidth,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 
@@ -16,6 +19,18 @@ const PeopleListRow = (data) => {
   return (
     <TouchableOpacity>
       <View style={s.root}>
+        <Image
+          style={{
+            width: 30,
+            height: 30,
+            borderWidth: 2,
+            borderColor: "#000",
+            borderRadius: 50,
+            backgroundColor: "red",
+            marginRight: 10,
+          }}
+          source={{ uri: data.picture.thumbnail }}
+        />
         <Text children={`${title}. ${first} ${last}`} />
       </View>
     </TouchableOpacity>

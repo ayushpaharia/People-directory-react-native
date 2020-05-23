@@ -14,7 +14,7 @@
 
 - [x] 2.  Fix PeopleListRow to display names correctly.
 
-- [ ] 3.  Extend PeopleListRow to display user images.
+- [x] 3.  Extend PeopleListRow to display user images.
 
 - [ ] 4.  Implement live search functionality. (it should search without case sensitivity in the following properties: person's full name, email, phone & cell numbers)
 
