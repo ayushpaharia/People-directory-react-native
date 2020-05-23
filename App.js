@@ -17,10 +17,11 @@ const s = StyleSheet.create({
     flex: 1,
   },
   pageTitle: {
-    width: "100%",
+    fontSize: 20,
+    letterSpacing: -1,
     textAlign: "center",
-    fontWeight: "900",
-    padding: 10,
+    fontWeight: "700",
+    paddingTop: 40,
   },
   input: {
     margin: 10,
