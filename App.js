@@ -1,65 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
+  ScrollView,
   SectionList,
+  // FlatList,
   SafeAreaView,
+  ActivityIndicator,
 } from "react-native";
 import PeopleListRow from "./components/PeopleListRow";
+import { SearchBar } from "react-native-elements";
 
 const s = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
   pageTitle: {
-    fontSize: 20,
+    color: "white",
+    backgroundColor: "#2b2f33",
+    fontSize: 22,
     letterSpacing: -1,
     textAlign: "center",
     fontWeight: "700",
     paddingTop: 40,
-  },
-  input: {
-    margin: 10,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#000",
+    paddingBottom: 15,
   },
 });
 
-export default function App() {
-  const [people, setPeople] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { results } = await fetch(
-        "https://randomuser.me/api/?results=100"
-      ).then((res) => res.json());
-      setPeople(
-        results.map((user) => ({
-          title: "",
-          data: [user],
-        }))
-      );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoading: true,
+      results: [],
     };
-    fetchUsers();
-  }, [setPeople]);
+  }
 
-  return (
-    <SafeAreaView style={s.root}>
-      <View style={s.container}>
-        <Text children="PEOPLE DIRECTORY" style={s.pageTitle} />
-        <TextInput style={s.input} />
-        <SectionList
-          sections={people}
-          renderItem={({ item }) => <PeopleListRow {...item} />}
-          keyExtractor={(item, index) => item.login.uuid}
+  loadPeople = () => {
+    const url = "https://randomuser.me/api/?results=100";
+    fetch(url)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          results: responseJson.results,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  componentDidMount() {
+    this.loadPeople();
+  }
+  renderUser = () => {
+    return this.state.results.map((item, index) => {
+      return <PeopleListRow {...item} />;
+    });
+  };
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        {this.state.isLoading ? (
+          <View
+            style={{
+              ...StyleSheet.absoluteFill,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <ActivityIndicator size="large" color="bad555" />
+          </View>
+        ) : null}
+        <SafeAreaView />
+        <Text style={s.pageTitle}>PEOPLE DIRECTORY</Text>
+        <SearchBar
+          placeholder="Type Here..."
+          onChangeText={(text) => console.log(text)}
+          value={this.loadPeople}
         />
+
+        <ScrollView style={{ flex: 1 }}>{this.renderUser()}</ScrollView>
       </View>
-    </SafeAreaView>
-  );
+    );
+  }
 }
