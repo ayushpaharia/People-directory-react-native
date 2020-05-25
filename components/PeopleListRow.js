@@ -21,17 +21,20 @@ const PeopleListRow = (data) => {
       <View style={s.root}>
         <Image
           style={{
-            width: 30,
-            height: 30,
+            width: 45,
+            height: 45,
             borderWidth: 2,
             borderColor: "#000",
             borderRadius: 50,
             backgroundColor: "red",
             marginRight: 10,
           }}
-          source={{ uri: data.picture.thumbnail }}
+          source={{ uri: data.picture.medium }}
         />
-        <Text children={`${title}. ${first} ${last}`} />
+        <Text
+          style={{ fontSize: 18 }}
+          children={`${title}. ${first} ${last}`}
+        />
       </View>
     </TouchableOpacity>
   );

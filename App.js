@@ -1,11 +1,9 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
-  SectionList,
-  // FlatList,
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
@@ -30,7 +28,9 @@ export default class App extends Component {
     super();
     this.state = {
       isLoading: true,
+      text: "",
       results: [],
+      newResults: [],
     };
   }
 
@@ -42,6 +42,7 @@ export default class App extends Component {
         this.setState({
           isLoading: false,
           results: responseJson.results,
+          newResults: responseJson.results,
         });
       })
       .catch((error) => {
@@ -52,11 +53,41 @@ export default class App extends Component {
   componentDidMount() {
     this.loadPeople();
   }
+
   renderUser = () => {
-    return this.state.results.map((item, index) => {
-      return <PeopleListRow {...item} />;
+    return this.state.newResults.map((item) => {
+      return <PeopleListRow key={item.login.uuid} {...item} />;
     });
   };
+
+  Search(inputText) {
+    const newData = this.state.results.filter((item) => {
+      const itemData =
+        item.name.first +
+        " " +
+        item.name.last +
+        " " +
+        item.email +
+        " " +
+        item.phone +
+        " " +
+        item.cell
+          ? item.name.first.toUpperCase() +
+            " " +
+            item.name.last.toUpperCase() +
+            item.email.toUpperCase() +
+            item.phone +
+            item.cell
+          : "".toUpperCase();
+      const textData = inputText.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({
+      newResults: newData,
+      text: inputText,
+    });
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -68,15 +99,17 @@ export default class App extends Component {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size="large" color="bad555" />
+            <ActivityIndicator animating size="large" color="bad555" />
           </View>
         ) : null}
         <SafeAreaView />
         <Text style={s.pageTitle}>PEOPLE DIRECTORY</Text>
         <SearchBar
           placeholder="Type Here..."
-          onChangeText={(text) => console.log(text)}
-          value={this.loadPeople}
+          onChangeText={(text) => {
+            this.Search(text);
+          }}
+          value={this.state.text}
         />
 
         <ScrollView style={{ flex: 1 }}>{this.renderUser()}</ScrollView>
