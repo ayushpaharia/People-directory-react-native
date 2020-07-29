@@ -1,14 +1,7 @@
-# Welcome to the React Native Code Challenge
 
-## How to do the job
 
-- Commit frequently. Absolut minimum is committing after every task is completed, but it is preferred if you commit more frequently. Include the task number in all of your commits.
 
-- If any of the below tasks is not clear, you may message us, ideally soon after you have started this challenge
-
-- You will be measured on fulfilling the tasks, code quality and speed.
-
-## Tasks
+## Features achieved
 
 - [x] 1.  Create a new private repo on github, invite vikas dosi (vikasdosi14). Only commit to this new repo.
 
@@ -20,6 +13,5 @@
 
 - [x] 5.  Open detail modal - when clicking on a person, a modal should be opened displaying the following informations: full name, email, phone, cell phone, picture.
 
-- [ ] 6.  Fix SectionList's headers. People dictionary needs to be wrapped by the first character of their last name.
+- [x] 6.  Fix SectionList's headers. People dictionary needs to be wrapped by the first character of their last name.
 
-- [ ] 7.  Implement basic image caching.
