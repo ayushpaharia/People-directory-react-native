@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import PeopleListRow from "./components/PeopleListRow";
 import { SearchBar } from "react-native-elements";
+import _ from "lodash";
 
 const s = StyleSheet.create({
   pageTitle: {
@@ -55,8 +56,8 @@ export default class App extends Component {
   }
 
   renderUser = () => {
-    return this.state.newResults.map((item) => {
-      return <PeopleListRow key={item.login.uuid} {...item} />;
+    return this.state.newResults.map((item, index) => {
+      return <PeopleListRow key={index} {...item} />;
     });
   };
 
@@ -82,6 +83,7 @@ export default class App extends Component {
       const textData = inputText.toUpperCase();
       return itemData.indexOf(textData) > -1;
     });
+
     this.setState({
       newResults: newData,
       text: inputText,

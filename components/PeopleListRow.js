@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  TouchableHighlight,
   Image,
   Modal,
 } from "react-native";
@@ -41,15 +40,22 @@ const PeopleListRow = (data) => {
           children={`${title}. ${first} ${last}`}
         />
       </View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        // onRequestClose={() => {
-        //   Alert.alert("Modal has been closed.");
-        // }}
-      >
-        <View style={styles.centeredView}>
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <View
+          visible={modalVisible}
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(52, 52, 52, 0.8)",
+          }}
+        ></View>
+        <View
+          style={{
+            ...styles.centeredView,
+            position: "absolute",
+            alignSelf: "center",
+            top: 220,
+          }}
+        >
           <View
             style={{
               ...styles.modalView,
