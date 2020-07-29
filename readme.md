@@ -1,4 +1,16 @@
 
+# People's Directory
+
+![People-Directory](https://i.postimg.cc/SsgzDFMZ/image-1.png)
+
+## Introduction
+
+This project is made by using React-native, React Hooks and randomuser.me API.
+
+The frontend is deployed using netlify
+
+Setup:
+- run ```npm i && npm start``` for client side to start the development server
 
 
 ## Features achieved
